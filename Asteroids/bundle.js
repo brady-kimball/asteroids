@@ -73,15 +73,17 @@
 const movingObject = __webpack_require__(1);
 const Util = __webpack_require__(4);
 
-function Asteroid(pos) {
+function Asteroid(pos, game) {
   this.pos = pos;
   this.color = Asteroid.COLOR;
   this.radius = Asteroid.RADIUS;
+  this.game = game;
   movingObject.call(this,
     {pos: this.pos,
     vel: randomVec(5),
     color: this.color,
-    radius: this.radius
+    radius: this.radius,
+    game: this.game
   });
 }
 Util.inherits(Asteroid, movingObject);
@@ -107,6 +109,7 @@ function MovingObject(options) {
   this.vel = options['vel'];
   this.radius = options['radius'];
   this.color = options['color'];
+  this.game = options['game'];
 }
 
 MovingObject.prototype.draw = function(ctx) {
@@ -122,6 +125,7 @@ MovingObject.prototype.move = function() {
   let dy = this.vel[1];
   this.pos[0] += dx;
   this.pos[1] += dy;
+  this.pos = this.game.wrap(this.pos);
 };
 
 
@@ -146,7 +150,7 @@ Game.NUM_ASTEROIDS = 10;
 
 Game.prototype.addAsteroids = function() {
   for (var i = 0; i < Game.NUM_ASTEROIDS; i++) {
-    this.asteroids.push(new Asteroid(randPos()));
+    this.asteroids.push(new Asteroid(randPos(), this));
   }
 };
 
@@ -157,6 +161,26 @@ Game.prototype.draw = function(ctx) {
 
 Game.prototype.moveObjects = function() {
   this.asteroids.forEach( asteroid => asteroid.move() );
+};
+
+Game.prototype.wrap = function(pos) {
+  let x = pos[0];
+  let y = pos[1];
+  let wrappedX;
+  let wrappedY;
+  // debugger
+  if(x < 0) {
+    wrappedX = Game.DIM_X + (x % Game.DIM_X);
+  } else {
+    wrappedX = (x % Game.DIM_X);
+  }
+
+  if(y < 0) {
+    wrappedY = Game.DIM_Y + (y % Game.DIM_Y);
+  } else {
+    wrappedY = (y % Game.DIM_Y);
+  }
+  return [wrappedX, wrappedY];
 };
 
 const randPos = function() {

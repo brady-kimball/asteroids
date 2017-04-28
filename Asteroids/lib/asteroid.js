@@ -1,15 +1,17 @@
 const movingObject = require('./moving_object.js');
 const Util = require('./utils.js');
 
-function Asteroid(pos) {
+function Asteroid(pos, game) {
   this.pos = pos;
   this.color = Asteroid.COLOR;
   this.radius = Asteroid.RADIUS;
+  this.game = game;
   movingObject.call(this,
     {pos: this.pos,
     vel: randomVec(5),
     color: this.color,
-    radius: this.radius
+    radius: this.radius,
+    game: this.game
   });
 }
 Util.inherits(Asteroid, movingObject);

@@ -11,7 +11,7 @@ Game.NUM_ASTEROIDS = 10;
 
 Game.prototype.addAsteroids = function() {
   for (var i = 0; i < Game.NUM_ASTEROIDS; i++) {
-    this.asteroids.push(new Asteroid(randPos()));
+    this.asteroids.push(new Asteroid(randPos(), this));
   }
 };
 
@@ -22,6 +22,26 @@ Game.prototype.draw = function(ctx) {
 
 Game.prototype.moveObjects = function() {
   this.asteroids.forEach( asteroid => asteroid.move() );
+};
+
+Game.prototype.wrap = function(pos) {
+  let x = pos[0];
+  let y = pos[1];
+  let wrappedX;
+  let wrappedY;
+  // debugger
+  if(x < 0) {
+    wrappedX = Game.DIM_X + (x % Game.DIM_X);
+  } else {
+    wrappedX = (x % Game.DIM_X);
+  }
+
+  if(y < 0) {
+    wrappedY = Game.DIM_Y + (y % Game.DIM_Y);
+  } else {
+    wrappedY = (y % Game.DIM_Y);
+  }
+  return [wrappedX, wrappedY];
 };
 
 const randPos = function() {
