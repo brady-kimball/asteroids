@@ -101,7 +101,7 @@ Function.prototype.curry2 = function(numArgs) {
     numbers = numbers.concat(args);
     if (numbers.length === numArgs) {
       // return fn.apply(null, numbers);
-      return fn(...numbers)
+      return fn(...numbers);
     } else {
       return _curry;
     }
