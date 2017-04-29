@@ -291,25 +291,9 @@ module.exports = Util;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-const Game = __webpack_require__(2);
-
-function GameView(ctx) {
-  this.game = new Game();
-  this.ctx = ctx;
-}
-
-GameView.prototype.start = function() {
-  setInterval(() => {
-    this.game.step();
-    this.game.draw(this.ctx);
-  }, 20);
-};
-
-
-module.exports = GameView
-
+throw new Error("Module parse failed: /Users/appacademy/Desktop/w5d5/Asteroids/lib/game_view.js Unexpected token (15:37)\nYou may need an appropriate loader to handle this file type.\n| };\n| \n| GameView.prototype.bindKeyHandlers() {};\n| \n| module.exports = GameView");
 
 /***/ }),
 /* 6 */
