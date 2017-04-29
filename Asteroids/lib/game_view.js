@@ -12,6 +12,5 @@ GameView.prototype.start = function() {
   }, 20);
 };
 
-GameView.prototype.bindKeyHandlers() {};
 
 module.exports = GameView

@@ -16,7 +16,7 @@ Ship.prototype.relocate = function() {
   this.vel = [0, 0];
 };
 
-Ship.RADIUS = 5;
+Ship.RADIUS = 10;
 Ship.COLOR = "Blue";
 
 module.exports = Ship;

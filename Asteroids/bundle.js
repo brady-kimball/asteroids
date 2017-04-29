@@ -291,9 +291,25 @@ module.exports = Util;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module parse failed: /Users/appacademy/Desktop/w5d5/Asteroids/lib/game_view.js Unexpected token (15:37)\nYou may need an appropriate loader to handle this file type.\n| };\n| \n| GameView.prototype.bindKeyHandlers() {};\n| \n| module.exports = GameView");
+const Game = __webpack_require__(2);
+
+function GameView(ctx) {
+  this.game = new Game();
+  this.ctx = ctx;
+}
+
+GameView.prototype.start = function() {
+  setInterval(() => {
+    this.game.step();
+    this.game.draw(this.ctx);
+  }, 20);
+};
+
+
+module.exports = GameView
+
 
 /***/ }),
 /* 6 */
@@ -317,7 +333,7 @@ Ship.prototype.relocate = function() {
   this.vel = [0, 0];
 };
 
-Ship.RADIUS = 5;
+Ship.RADIUS = 10;
 Ship.COLOR = "Blue";
 
 module.exports = Ship;
